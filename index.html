@@ -148,7 +148,8 @@ a.card:hover{border-color:var(--accent);transform:translateY(-4px)}
 .card .kind{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 .card h3{font-size:21px}
 .card p{color:var(--muted);font-size:15px}
-.card.big{grid-column:span 2;flex-direction:row}
+.card:not(:has(.img)) h3{margin-top:auto}
+.card.big{grid-column:1/-1;flex-direction:row}
 .card.big .img{flex:1.1;aspect-ratio:auto;min-height:280px}
 .card.big .body{flex:1;justify-content:center;padding:28px}
 @media (max-width:960px){.proj-grid{grid-template-columns:repeat(2,1fr)}}
@@ -328,13 +329,6 @@ footer a{text-decoration:underline}
           <p><span lang="sk">Vlastná doska, sedačka vie, kde je — bez koncových spínačov.</span><span lang="en">Custom board; the sofa knows its position — no limit switches.</span></p>
         </div>
       </a>
-      <div class="card reveal">
-        <div class="body">
-          <span class="kind">Raspberry Pi 5</span>
-          <h3>PeterLinuxOS</h3>
-          <p><span lang="sk">Vlastný Linux pre Raspberry Pi 5 — odtiaľ tá prezývka.</span><span lang="en">My own Linux build for Raspberry Pi 5 — hence the handle.</span></p>
-        </div>
-      </div>
       <a class="card reveal" href="https://github.com/PeterLinuxOSS/ha-cover-logic" target="_blank" rel="noopener">
         <div class="body">
           <span class="kind">Home Assistant</span>
