@@ -4,154 +4,193 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peter Rigo · PeterLinuxOS</title>
-<meta name="description" content="Peter Rigo — IT infraštruktúra, home automation a vlastný hardvér na ESP32. Projekty, úspechy a kontakt.">
-<meta name="theme-color" content="#0b1215">
+<meta name="description" content="Peter Rigo z Popradu — IT, elektronika a vlastné PCB, pyromuzikály a wingfoil. Tím FLUJD, SOČ, ENERSOL.">
+<meta name="theme-color" content="#13202E">
 <link rel="canonical" href="https://peterlinuxos.me/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Peter Rigo · PeterLinuxOS">
-<meta property="og:description" content="IT infraštruktúra, home automation a vlastný hardvér na ESP32.">
+<meta property="og:description" content="IT, elektronika, pyromuzikály a wingfoil. Poprad pod Tatrami.">
 <meta property="og:url" content="https://peterlinuxos.me/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2027'/%3E%3Ctext x='12' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23ff8a1f'%3E%3E_%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="https://peterlinuxos.me/media/trophies.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313202E'/%3E%3Ctext x='12' y='43' font-family='monospace' font-size='30' font-weight='700' fill='%23F08A3E'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Peter Rigo","alternateName":"PeterLinuxOS","url":"https://peterlinuxos.me/",
- "sameAs":["https://github.com/PeterLinuxOSS","https://www.instagram.com/peterlinuxos/","https://www.youtube.com/@PeterLinuxOS"],"worksFor":{"@type":"Organization","name":"DATA SOFTWARE","url":"https://datasoftware.sk"},
- "alumniOf":"SPŠ techniky a dizajnu Poprad","knowsAbout":["IT infrastructure","Home Assistant","ESP32","Embedded systems","Linux"]}
+ "image":"https://peterlinuxos.me/media/trophies.jpg","homeLocation":{"@type":"Place","name":"Poprad, Slovakia"},
+ "sameAs":["https://github.com/PeterLinuxOSS","https://www.instagram.com/peterlinuxos/","https://www.youtube.com/@PeterLinuxOS"],
+ "worksFor":{"@type":"Organization","name":"DATA SOFTWARE","url":"https://datasoftware.sk"},
+ "alumniOf":"SPŠ techniky a dizajnu Poprad","knowsAbout":["Mechatronics","PCB design","ESP32","Home Assistant","Linux","Pyromusical design"]}
 </script>
 <style>
 :root{
-  --bg:#0b1215; --bg2:#0f1a1f; --card:#121f25; --line:#1f3138;
-  --text:#e6edf0; --muted:#8fa3ab; --accent:#ff8a1f; --accent2:#3fb6c9;
-  --grad:linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%);
-  --sans:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --r:16px;
+  --bg:#0f1a26; --navy:#13202E; --card:#192a3b; --line:#24384b;
+  --text:#F5F2EC; --muted:#a3b0bc; --cream:#F5F2EC; --ink:#13202E;
+  --accent:#F08A3E; --accent2:#E8772E;
+  --head:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --sans:"DM Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:18px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--accent);color:#000}
+img,video{display:block;max-width:100%;height:auto}
+::selection{background:var(--accent);color:var(--ink)}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.05}
 
 /* jazyky: obsah je v DOM v oboch, zobrazí sa podľa data-lang */
 html[data-lang="sk"] [lang="en"], html[data-lang="en"] [lang="sk"]{display:none}
 
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-.mono{font-family:var(--mono)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.label{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 
 /* nav */
-nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(11,18,21,.72);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+nav{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(15,26,38,.85);backdrop-filter:blur(12px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
 .logo{font:600 15px var(--mono)}
 .logo b{color:var(--accent);font-weight:600}
-.links{display:flex;gap:22px;align-items:center;font-size:15px;color:var(--muted)}
-.links a:hover{color:var(--text)}
-.lang{font:600 12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:none;color:var(--text);cursor:pointer}
+.links{display:flex;gap:22px;align-items:center;font-size:15px;color:#d5dbe0}
+.links a:hover{color:var(--accent)}
+.lang{font:600 12px var(--mono);border:1px solid rgba(245,242,236,.3);border-radius:999px;padding:5px 10px;background:none;color:var(--text);cursor:pointer}
 .lang:hover{border-color:var(--accent)}
-@media (max-width:720px){.links a{display:none}}
+@media (max-width:780px){.links a{display:none}}
 
 /* hero */
-.hero{position:relative;padding:110px 0 90px}
-.hero::before{content:"";position:absolute;inset:-200px 0 auto;height:640px;background:radial-gradient(600px 300px at 15% 30%,rgba(44,83,100,.55),transparent 70%),radial-gradient(500px 260px at 85% 10%,rgba(255,138,31,.13),transparent 70%);z-index:-1}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
-.tag{display:inline-flex;align-items:center;gap:8px;font:500 13px var(--mono);color:var(--accent2);border:1px solid var(--line);background:var(--bg2);padding:6px 12px;border-radius:999px;margin-bottom:22px}
-.tag i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84}
-h1{font-size:clamp(44px,7vw,76px);line-height:1.02;letter-spacing:-.03em;font-weight:700}
-h1 span{background:linear-gradient(90deg,var(--accent),#ffc06b);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{margin-top:20px;font-size:19px;color:var(--muted);max-width:540px}
-.lead strong{color:var(--text);font-weight:500}
-.cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:500;font-size:15px;border:1px solid var(--line);background:var(--card);transition:.2s}
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;
+  background:linear-gradient(100deg,rgba(15,26,38,.97) 0%,rgba(15,26,38,.86) 45%,rgba(15,26,38,.55) 100%),url(media/poprad.jpg) center 30%/cover}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:160px;background:linear-gradient(transparent,var(--bg))}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;width:100%}
+.where{display:inline-flex;gap:8px;align-items:center;font:500 13px var(--mono);color:var(--cream);background:rgba(245,242,236,.08);border:1px solid rgba(245,242,236,.18);padding:6px 12px;border-radius:999px;margin-bottom:24px}
+.where i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+h1{font-size:clamp(52px,8.5vw,104px);font-weight:700}
+h1 span{display:block;color:var(--accent)}
+.tagline{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.tagline span{font:500 15px var(--sans);padding:7px 14px;border-radius:999px;background:rgba(245,242,236,.1);border:1px solid rgba(245,242,236,.16)}
+.cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font:500 15px var(--sans);border:1px solid var(--line);background:var(--card);transition:.2s}
 .btn:hover{border-color:var(--accent);transform:translateY(-2px)}
-.btn.primary{background:var(--accent);color:#111;border-color:var(--accent)}
-.btn.primary:hover{background:#ff9d42}
-.btn svg{width:18px;height:18px}
-.socials{display:flex;gap:10px;margin-top:22px}
-.socials a{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);transition:.2s}
+.btn.primary{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent2)}
+.socials{display:flex;gap:10px}
+.socials a{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;border:1px solid rgba(245,242,236,.2);background:rgba(19,32,46,.6);color:var(--cream);transition:.2s}
 .socials a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
-.socials svg{width:19px;height:19px}
+.socials svg{width:20px;height:20px}
 
-.term{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.7);font:13.5px/1.75 var(--mono)}
-.term-bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:#0d171b}
-.term-bar i{width:11px;height:11px;border-radius:50%;background:#2a3b42}
-.term-bar i:nth-child(1){background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
-.term pre{padding:18px 20px;white-space:pre-wrap;color:var(--muted)}
-.term .p{color:var(--accent)}.term .c{color:var(--text)}.term .k{color:var(--accent2)}
-.cursor{display:inline-block;width:8px;height:16px;background:var(--accent);vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-@media (max-width:860px){.hero{padding:70px 0 60px}.hero .wrap{grid-template-columns:1fr}}
+.phone{justify-self:center;width:min(300px,100%);aspect-ratio:9/16;border-radius:30px;overflow:hidden;border:6px solid #0b131c;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px var(--line);background:#0b131c;position:relative}
+.phone video,.phone img{width:100%;height:100%;object-fit:cover}
+.phone figcaption{position:absolute;left:12px;bottom:12px;font:600 11px var(--mono);background:rgba(19,32,46,.8);padding:5px 9px;border-radius:8px;letter-spacing:.06em}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.phone{width:min(240px,70%)}}
 
 /* sekcie */
-section{padding:80px 0;border-top:1px solid var(--line)}
-.head{display:flex;align-items:baseline;gap:14px;margin-bottom:36px;flex-wrap:wrap}
-.head .mono{color:var(--accent);font-size:14px}
-h2{font-size:clamp(28px,4vw,38px);letter-spacing:-.02em;font-weight:700}
+section{padding:96px 0}
+.head{margin-bottom:40px;max-width:720px}
+.head h2{font-size:clamp(34px,5vw,56px);margin-top:10px}
+.head p{color:var(--muted);margin-top:14px;font-size:18px}
 
-.grid{display:grid;gap:16px}
-.g4{grid-template-columns:repeat(4,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-@media (max-width:960px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:600px){.g4,.g3{grid-template-columns:1fr}}
+/* čísla */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-30px;position:relative;z-index:2}
+.num{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.num b{display:block;font:700 44px/1 var(--head);color:var(--accent)}
+.num span{display:block;margin-top:10px;font-size:14px;color:var(--muted);line-height:1.4}
+@media (max-width:860px){.nums{grid-template-columns:repeat(2,1fr)}}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;transition:.25s;position:relative}
-.card:hover{border-color:#2f4a54;transform:translateY(-3px)}
-.card .ico{font-size:26px;margin-bottom:12px}
-.card h3{font-size:18px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em}
+/* úspechy – krémová sekcia */
+.light{background:var(--cream);color:var(--ink)}
+.light .head p,.light .muted{color:#5c6773}
+.light .label{color:var(--accent2)}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.ach-photo{border-radius:var(--r);overflow:hidden;position:sticky;top:90px;box-shadow:0 30px 60px -30px rgba(19,32,46,.5)}
+.ach-photo figcaption{background:var(--ink);color:var(--cream);font:500 13px var(--mono);padding:12px 16px}
+.list{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;padding:14px 18px;background:#fff;border-radius:14px;border:1px solid #e6e0d5}
+.row .pos{font:700 28px/1 var(--head);color:var(--accent2);text-align:center}
+.row .pos.sm{font-size:17px}
+.row b{font:600 16px var(--sans);display:block}
+.row small{color:#6b7580;font-size:14px}
+@media (max-width:860px){.ach-grid{grid-template-columns:1fr}.ach-photo{position:static}}
+
+/* wingfoil */
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vid{border-radius:var(--r);overflow:hidden;aspect-ratio:9/16;background:#0b131c;position:relative;border:1px solid var(--line)}
+.vid video{width:100%;height:100%;object-fit:cover}
+.vid figcaption{position:absolute;left:12px;bottom:12px;font:600 11px var(--mono);letter-spacing:.06em;background:rgba(19,32,46,.8);padding:5px 9px;border-radius:8px}
+.quote-tile{display:flex;flex-direction:column;justify-content:flex-end;gap:16px;padding:28px;background:linear-gradient(160deg,var(--card),var(--navy) 70%)}
+.quote-tile::before{content:"„";position:absolute;top:-10px;left:22px;font:700 140px/1 var(--head);color:var(--accent);opacity:.9}
+.quote{font:500 clamp(22px,2.4vw,30px)/1.25 var(--head)}
+.quote-tile .sub{color:var(--muted);font-size:16px}
+.quote-tile small{color:var(--accent);font:600 13px var(--mono)}
+@media (max-width:700px){.vids{grid-template-columns:repeat(3,72%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.vid{scroll-snap-align:start}}
+
+/* pyro */
+.pyro{background:radial-gradient(900px 400px at 70% 0%,rgba(240,138,62,.12),transparent 70%),var(--navy)}
+.cmp{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);position:relative;background:#000}
+.cmp video{width:100%;aspect-ratio:1600/502;object-fit:cover}
+.cmp .tag{position:absolute;top:12px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(19,32,46,.85);padding:6px 10px;border-radius:8px}
+.cmp .l{left:12px}.cmp .r{right:12px;color:var(--accent)}
+.years{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center}
+.years .muted{color:var(--muted);font-size:14px;margin-right:6px}
+.chip{font:500 13px var(--mono);padding:8px 13px;border-radius:10px;background:var(--card);border:1px solid var(--line);transition:.2s;display:inline-flex;gap:6px;align-items:center}
+a.chip:hover{border-color:var(--accent);color:var(--accent)}
+
+/* projekty */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+a.card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.card .img{aspect-ratio:16/10;overflow:hidden;background:#0b131c}
+.card .img img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .kind{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-size:21px}
 .card p{color:var(--muted);font-size:15px}
+.card.big{grid-column:span 2;flex-direction:row}
+.card.big .img{flex:1.1;aspect-ratio:auto;min-height:280px}
+.card.big .body{flex:1;justify-content:center;padding:28px}
+@media (max-width:960px){.proj-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.proj-grid{grid-template-columns:1fr}.card.big{grid-column:auto;flex-direction:column}.card.big .img{min-height:220px}}
 
-.proj{display:flex;flex-direction:column}
-.proj .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.proj .kind{font:500 12px var(--mono);color:var(--accent2);text-transform:uppercase;letter-spacing:.06em}
-.proj .arrow{color:var(--muted);transition:.2s}
-.proj:hover .arrow{color:var(--accent);transform:translate(3px,-3px)}
-.proj p{flex:1}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.chip{font:500 12px var(--mono);padding:4px 9px;border-radius:7px;background:var(--bg2);border:1px solid var(--line);color:var(--muted)}
-.proj.feat{grid-column:span 2;background:var(--grad);border-color:#2c5364}
-.proj.feat p{color:#c3d3d9}
-@media (max-width:600px){.proj.feat{grid-column:auto}}
+/* mimo práce */
+.life{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.life .photo{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);position:relative;min-height:300px}
+.life .photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.life .photo figcaption{position:absolute;left:14px;bottom:14px;font:600 11px var(--mono);letter-spacing:.06em;background:rgba(19,32,46,.85);padding:6px 10px;border-radius:8px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;justify-content:space-between;min-height:140px}
+.tile .e{font-size:30px}
+.tile b{font:600 18px var(--head)}
+.tile small{color:var(--muted);font-size:14px}
+@media (max-width:760px){.life{grid-template-columns:1fr}}
 
-/* úspechy */
-.timeline{display:grid;gap:12px}
-.ach{display:grid;grid-template-columns:70px 44px 1fr;align-items:center;gap:8px;padding:16px 20px;background:var(--card);border:1px solid var(--line);border-radius:14px}
-.ach .y{font:600 14px var(--mono);color:var(--muted)}
-.ach .m{font-size:24px}
-.ach b{font-weight:600}
-.ach small{display:block;color:var(--muted);font-size:14px}
-@media (max-width:600px){.ach{grid-template-columns:40px 1fr}.ach .y{grid-column:1/-1;font-size:12px}}
-
-/* stack */
-.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media (max-width:860px){.stack{grid-template-columns:1fr}}
-.stack h3{font:600 13px var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
-.stack .chips{margin-top:0}
-.stack .chip{font-size:13px;padding:6px 11px;color:var(--text)}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 
 /* kontakt */
-.contact{text-align:center;padding:100px 0}
-.contact h2{font-size:clamp(32px,5vw,52px)}
-.contact p{color:var(--muted);margin:14px auto 30px;max-width:520px}
+.contact{text-align:center;padding:110px 0}
+.contact h2{font-size:clamp(36px,6vw,64px)}
+.contact p{color:var(--muted);margin:16px auto 32px;max-width:520px;font-size:18px}
 .contact .cta{justify-content:center}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font:13px var(--mono)}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font:12.5px var(--mono)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:underline}
 
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <div class="wrap">
     <a href="#" class="logo">peter@<b>linuxos</b>:~$</a>
     <div class="links">
-      <a href="#about"><span lang="sk">O mne</span><span lang="en">About</span></a>
-      <a href="#projects"><span lang="sk">Projekty</span><span lang="en">Projects</span></a>
-      <a href="#achievements"><span lang="sk">Úspechy</span><span lang="en">Awards</span></a>
-      <a href="#contact"><span lang="sk">Kontakt</span><span lang="en">Contact</span></a>
+      <a href="#uspechy"><span lang="sk">Úspechy</span><span lang="en">Awards</span></a>
+      <a href="#wingfoil">Wingfoil</a>
+      <a href="#pyro">Pyro</a>
+      <a href="#projekty"><span lang="sk">Projekty</span><span lang="en">Projects</span></a>
+      <a href="#kontakt"><span lang="sk">Kontakt</span><span lang="en">Contact</span></a>
       <button class="lang" id="lang" aria-label="Switch language"><span lang="sk">EN</span><span lang="en">SK</span></button>
     </div>
   </div>
@@ -160,184 +199,197 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <header class="hero">
   <div class="wrap">
     <div>
-      <div class="tag"><i></i><span lang="sk">Praha · Slovensko</span><span lang="en">Prague · Slovakia</span></div>
-      <h1>Peter Rigo<br><span>PeterLinuxOS</span></h1>
-      <p class="lead">
-        <span lang="sk">Staram sa o <strong>IT infraštruktúru</strong> firiem, cez víkend navrhujem <strong>vlastné dosky s ESP32</strong> a automatizujem všetko, čo má IP adresu.</span>
-        <span lang="en">I run <strong>IT infrastructure</strong> for companies, design <strong>custom ESP32 boards</strong> on weekends and automate anything that has an IP address.</span>
-      </p>
+      <div class="where"><i></i><span lang="sk">Poprad pod Tatrami · Praha</span><span lang="en">Poprad, High Tatras · Prague</span></div>
+      <h1>Peter Rigo<span>PeterLinuxOS</span></h1>
+      <div class="tagline">
+        <span>💻 IT Dev</span>
+        <span lang="sk">🔌 Elektronika &amp; PCB</span><span lang="en">🔌 Electronics &amp; PCB</span>
+        <span lang="sk">🎆 Pyromuzikály</span><span lang="en">🎆 Pyromusicals</span>
+        <span>🌊 Wingfoil</span>
+        <span>🏠 Smart home</span>
+      </div>
       <div class="cta">
-        <a class="btn primary" href="#projects"><span lang="sk">Pozri projekty</span><span lang="en">See projects</span> →</a>
-        <a class="btn" href="https://github.com/PeterLinuxOSS" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-          GitHub
-        </a>
-      </div>
-      <div class="socials">
-        <a href="https://github.com/PeterLinuxOSS" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
-        <a href="https://www.instagram.com/peterlinuxos/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://www.youtube.com/@PeterLinuxOS" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.8 15.1V8.9l5.4 3.1-5.4 3.1Z"/></svg></a>
+        <a class="btn primary" href="#uspechy"><span lang="sk">Čo som dokázal</span><span lang="en">What I've done</span> →</a>
+        <div class="socials">
+          <a href="https://www.instagram.com/peterlinuxos/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.youtube.com/@PeterLinuxOS" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.8 15.1V8.9l5.4 3.1-5.4 3.1Z"/></svg></a>
+          <a href="https://github.com/PeterLinuxOSS" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+        </div>
       </div>
     </div>
-
-    <div class="term" aria-hidden="true">
-      <div class="term-bar"><i></i><i></i><i></i></div>
-<pre><span class="p">~$</span> <span class="c">whoami</span>
-peter rigo · infra / embedded / homelab
-
-<span class="p">~$</span> <span class="c">cat now.txt</span>
-<span class="k">work</span>    DATA SOFTWARE — managed IT
-<span class="k">study</span>   BSc Software Development @ Unicorn
-<span class="k">build</span>   AGV 2.0 · Už fúka · smart home
-<span class="k">wind</span>    wingfoil, keď fúka
-
-<span class="p">~$</span> <span class="cursor"></span></pre>
-    </div>
+    <figure class="phone">
+      <video data-auto muted loop playsinline preload="none" poster="media/wf_pb.jpg"><source src="media/wf_pb.mp4" type="video/mp4"></video>
+      <figcaption lang="sk">OSOBÁK V RÝCHLOSTI</figcaption><figcaption lang="en">SPEED PERSONAL BEST</figcaption>
+    </figure>
   </div>
 </header>
 
 <main>
-<section id="about">
+<div class="wrap">
+  <div class="nums">
+    <div class="num reveal"><b>4.</b><span lang="sk">SOČ celoštátne kolo<br>elektrotechnika a mechatronika</span><span lang="en">SOČ national finals<br>electrical eng. &amp; mechatronics</span></div>
+    <div class="num reveal"><b>4.</b><span lang="sk">Pneuracer, VUT Brno<br>15 finalistov zo 42 tímov</span><span lang="en">Pneuracer, Brno Univ. of Tech.<br>15 finalists of 42 teams</span></div>
+    <div class="num reveal"><b>TOP 9</b><span lang="sk">ENERSOL medzinárodne<br>špeciálna cena</span><span lang="en">ENERSOL international<br>special prize</span></div>
+    <div class="num reveal"><b>2×</b><span lang="sk">Mechatronik roka<br>SPŠ TaD Poprad</span><span lang="en">Mechatronics student of the year<br>SPŠ TaD Poprad</span></div>
+  </div>
+</div>
+
+<section id="uspechy" class="light" style="margin-top:96px">
   <div class="wrap">
-    <div class="head reveal"><span class="mono">01</span><h2><span lang="sk">O mne</span><span lang="en">About me</span></h2></div>
-    <div class="grid g4">
-      <div class="card reveal">
-        <div class="ico">🏗️</div>
-        <h3><span lang="sk">Infraštruktúra</span><span lang="en">Infrastructure</span></h3>
-        <p><span lang="sk">V <a href="https://datasoftware.sk" target="_blank" rel="noopener"><u>DATA SOFTWARE</u></a> robím outsourcované IT pre firmy — Proxmox, VMware ESXi, zálohy, siete, firewally a monitoring.</span>
-           <span lang="en">At <a href="https://datasoftware.sk" target="_blank" rel="noopener"><u>DATA SOFTWARE</u></a> I do outsourced IT for companies — Proxmox, VMware ESXi, backups, networks, firewalls and monitoring.</span></p>
-      </div>
-      <div class="card reveal">
-        <div class="ico">🔌</div>
-        <h3><span lang="sk">Hardvér</span><span lang="en">Hardware</span></h3>
-        <p><span lang="sk">Vlastné dosky s ESP32-S3 od schémy cez PCB až po firmvér. Elektronika a riadenie v tíme FLUJD.</span>
-           <span lang="en">Custom ESP32-S3 boards from schematic to PCB to firmware. Electronics and control lead in team FLUJD.</span></p>
-      </div>
-      <div class="card reveal">
-        <div class="ico">🎓</div>
-        <h3><span lang="sk">Štúdium</span><span lang="en">Study</span></h3>
-        <p><span lang="sk">Absolvent SPŠ techniky a dizajnu v Poprade (mechatronika), teraz BSc Software Development na Unicorn University v Prahe.</span>
-           <span lang="en">Graduate of SPŠ techniky a dizajnu Poprad (mechatronics), now reading BSc Software Development at Unicorn University, Prague.</span></p>
-      </div>
-      <div class="card reveal">
-        <div class="ico">🌊</div>
-        <h3>Wingfoil</h3>
-        <p><span lang="sk">Keď fúka, som na vode. Preto vznikla appka Už fúka — aby som o tom vedel prvý.</span>
-           <span lang="en">When the wind shows up, I'm on the water. That's why I built Už fúka — to know first.</span></p>
+    <div class="head reveal">
+      <div class="label"><span lang="sk">Súťaže 2026</span><span lang="en">Competitions 2026</span></div>
+      <h2><span lang="sk">Vzduch namiesto benzínu</span><span lang="en">Air instead of petrol</span></h2>
+      <p><span lang="sk">S tímom FLUJD sme postavili auto na stlačený vzduch. Ja som navrhol elektroniku a riadiacu dosku — od verzie v1 po v8.9.</span>
+         <span lang="en">With team FLUJD we built a compressed-air car. I designed the electronics and the main control board — from v1 to v8.9.</span></p>
+    </div>
+    <div class="ach-grid">
+      <figure class="ach-photo reveal">
+        <img src="media/trophies.jpg" alt="Auto FLUJD s pohármi, medailami a diplomami" loading="lazy" width="1600" height="900">
+        <figcaption lang="sk">FLUJD po krajskom kole ENERSOL · Humenné</figcaption><figcaption lang="en">FLUJD after the ENERSOL regional round · Humenné</figcaption>
+      </figure>
+      <div class="list">
+        <div class="row reveal"><div class="pos">1.</div><div><b lang="sk">ENERSOL — krajské kolo, absolútni víťazi</b><b lang="en">ENERSOL — regional round, overall winners</b><small>Humenné · 27. 2. 2026</small></div></div>
+        <div class="row reveal"><div class="pos">2.</div><div><b lang="sk">ENERSOL — celoštátne kolo</b><b lang="en">ENERSOL — national round</b><small lang="sk">Senica · postup na medzinárodné kolo</small><small lang="en">Senica · advanced to the international round</small></div></div>
+        <div class="row reveal"><div class="pos sm">TOP 9</div><div><b lang="sk">ENERSOL — medzinárodne, špeciálna cena</b><b lang="en">ENERSOL — international, special prize</b><small lang="sk">9 ocenených z 26 · ďakovný list MŠVVaM SR</small><small lang="en">9 awarded of 26 · letter of thanks from the Slovak Ministry of Education</small></div></div>
+        <div class="row reveal"><div class="pos">2.</div><div><b lang="sk">Strojár Inovátor</b><b lang="en">Strojár Inovátor</b><small lang="sk">celoslovenská súťaž · TU Košice</small><small lang="en">national competition · TU Košice</small></div></div>
+        <div class="row reveal"><div class="pos">2.</div><div><b lang="sk">SOČ — krajské kolo</b><b lang="en">SOČ — regional round</b><small lang="sk">Prešov · postup na celoštátne kolo</small><small lang="en">Prešov · advanced to national finals</small></div></div>
+        <div class="row reveal"><div class="pos">4.</div><div><b lang="sk">SOČ — celoštátne kolo</b><b lang="en">SOČ — national finals</b><small lang="sk">elektrotechnika, hardware, mechatronika</small><small lang="en">electrical engineering, hardware, mechatronics</small></div></div>
+        <div class="row reveal"><div class="pos">4.</div><div><b lang="sk">Pneuracer — finále</b><b lang="en">Pneuracer — finals</b><small lang="sk">VUT Brno · 15 finalistov zo 42 tímov</small><small lang="en">Brno Univ. of Technology · 15 finalists of 42 teams</small></div></div>
+        <div class="row reveal"><div class="pos sm">2×</div><div><b lang="sk">Mechatronik roka</b><b lang="en">Mechatronics student of the year</b><small>SPŠ TaD Poprad · 2025, 2026</small></div></div>
+        <div class="row reveal"><div class="pos sm">🤖</div><div><b>ROBO 2024 · ROBO 2025</b><small lang="sk">robot sledujúci čiaru · aj medzinárodne s RoboVehicle</small><small lang="en">line-following robot · also internationally with RoboVehicle</small></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
+<section id="wingfoil">
   <div class="wrap">
-    <div class="head reveal"><span class="mono">02</span><h2><span lang="sk">Projekty</span><span lang="en">Projects</span></h2></div>
-    <div class="grid g3">
-
-      <a class="card proj feat reveal" href="https://flujd.tech" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">FLUJD · Pneuracer 2.0</span><span class="arrow">↗</span></div>
-        <h3><span lang="sk">Auto poháňané stlačeným vzduchom</span><span lang="en">Compressed-air powered car</span></h3>
-        <p><span lang="sk">Súťažné auto pre Pneuracer na VUT Brno. Navrhol som vlastnú dosku s dvoma ESP32-S3 — 8 revízií PCB. 4. miesto vo finále. Teraz pracujeme na AGV 2.0.</span>
-           <span lang="en">Competition car for Pneuracer at Brno University of Technology. I designed a custom dual ESP32-S3 board — 8 PCB revisions. 4th place in the finals. Now working on AGV 2.0.</span></p>
-        <div class="chips"><span class="chip">ESP32-S3</span><span class="chip">EasyEDA</span><span class="chip">C++</span><span class="chip">flujd.tech</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://uzfuka.sk" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">Web app</span><span class="arrow">↗</span></div>
-        <h3>Už fúka</h3>
-        <p><span lang="sk">Sledovanie vetra pre windsurf, wingfoil a kite. Dáta z meteostaníc a upozornenie, keď na tvojom spote začne fúkať.</span>
-           <span lang="en">Wind tracking for windsurf, wingfoil and kite. Live weather station data and an alert when your spot starts blowing.</span></p>
-        <div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">uzfuka.sk</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/iSauna" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">Home Assistant</span><span class="arrow">↗</span></div>
-        <h3>iSauna</h3>
-        <p><span lang="sk">Natívna integrácia pre ovládacie jednotky sáun iSauna.</span>
-           <span lang="en">Native integration for iSauna sauna control units.</span></p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">HA</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/esphome-smart-sofa" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">Open hardware</span><span class="arrow">↗</span></div>
-        <h3>Smart sofa</h3>
-        <p><span lang="sk">Motorizovaná sedačka, ktorá vie, kde je — koncové polohy cez meranie prúdu INA226, bez koncových spínačov.</span>
-           <span lang="en">Position-aware motorised recliner — INA226 current-sensed end stops, no limit switches.</span></p>
-        <div class="chips"><span class="chip">ESPHome</span><span class="chip">ESP32</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/ha-cover-logic" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">Home Assistant</span><span class="arrow">↗</span></div>
-        <h3>Cover logic</h3>
-        <p><span lang="sk">Jeden engine rozhodne, kde má byť každá žalúzia podľa režimu domu a pravidiel — a povie, ktoré pravidlo rozhodlo.</span>
-           <span lang="en">One engine decides where every blind should be from house modes and rules — and tells you which rule decided it.</span></p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">HA</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/maturita-kviz" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">AI · Edu</span><span class="arrow">↗</span></div>
-        <h3><span lang="sk">Maturita kvíz</span><span lang="en">Maturita quiz</span></h3>
-        <p><span lang="sk">Cvičný kvíz na maturitu z mechatroniky — 23 tém, otázky generuje Claude zakaždým nanovo.</span>
-           <span lang="en">Practice quiz for the mechatronics exit exam — 23 topics, questions freshly generated by Claude.</span></p>
-        <div class="chips"><span class="chip">JavaScript</span><span class="chip">Claude API</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/ha-llm-latency" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">AI · Benchmark</span><span class="arrow">↗</span></div>
-        <h3>LLM latency</h3>
-        <p><span lang="sk">Benchmark odozvy LLM modelov, ktoré poháňajú hlasového asistenta v Home Assistant.</span>
-           <span lang="en">Chat-completion latency benchmark for LLMs used as Home Assistant voice agents.</span></p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">HA</span></div>
-      </a>
-
-      <a class="card proj reveal" href="https://github.com/PeterLinuxOSS/autoskola-watcher" target="_blank" rel="noopener">
-        <div class="top"><span class="kind">Bot</span><span class="arrow">↗</span></div>
-        <h3><span lang="sk">Autoškola watcher</span><span lang="en">Driving school watcher</span></h3>
-        <p><span lang="sk">Stráži voľné termíny jázd v autoškolách a pošle správu na Telegram, keď sa niečo uvoľní.</span>
-           <span lang="en">Watches driving-school booking slots and pings Telegram the moment one frees up.</span></p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">Telegram</span></div>
-      </a>
-
+    <div class="head reveal">
+      <div class="label"><span lang="sk">Srdcovka</span><span lang="en">My thing</span></div>
+      <h2>Wingfoil</h2>
+      <p><span lang="sk">Slovensko aj Chorvátsko. Natáčam na Insta360 X5.</span><span lang="en">Slovakia and Croatia. Filmed on an Insta360 X5.</span></p>
+    </div>
+    <div class="vids">
+      <figure class="vid reveal"><video data-auto muted loop playsinline preload="none" poster="media/wf_cro.jpg"><source src="media/wf_cro.mp4" type="video/mp4"></video><figcaption lang="sk">CHORVÁTSKO</figcaption><figcaption lang="en">CROATIA</figcaption></figure>
+      <figure class="vid reveal"><video data-auto muted loop playsinline preload="none" poster="media/wf_fail.jpg"><source src="media/wf_fail.mp4" type="video/mp4"></video><figcaption lang="sk">A NIEKEDY TAKTO</figcaption><figcaption lang="en">AND SOMETIMES THIS</figcaption></figure>
+      <div class="vid quote-tile reveal">
+        <p class="quote"><span lang="sk">Wingfoiling nie je len šport. Je to najlepšia škola, akú som mal.</span><span lang="en">Wingfoiling isn't just a sport. It's the best school I've ever had.</span></p>
+        <p class="sub"><span lang="sk">Sem-tam padneš, no vstaneš a ideš ďalej silnejší.</span><span lang="en">Now and then you fall, but you get up and go on stronger.</span></p>
+        <small>— Peter</small>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="achievements">
+<section id="pyro" class="pyro">
   <div class="wrap">
-    <div class="head reveal"><span class="mono">03</span><h2><span lang="sk">Úspechy</span><span lang="en">Achievements</span></h2></div>
-    <div class="timeline">
-      <div class="ach reveal"><span class="y">2026</span><span class="m">🏁</span><div><b><span lang="sk">Pneuracer — 4. miesto vo finále</span><span lang="en">Pneuracer — 4th place in the finals</span></b><small><span lang="sk">VUT Brno · 15 finalistov zo 42 tímov · tím FLUJD</span><span lang="en">Brno University of Technology · 15 finalists out of 42 teams · team FLUJD</span></small></div></div>
-      <div class="ach reveal"><span class="y">2026</span><span class="m">🌍</span><div><b><span lang="sk">ENERSOL — medzinárodné kolo, špeciálna cena</span><span lang="en">ENERSOL — international round, special prize</span></b><small><span lang="sk">+ 1. miesto v krajskom a 2. miesto v celoštátnom kole (mechatronika)</span><span lang="en">+ 1st place regional, 2nd place national round (mechatronics)</span></small></div></div>
-      <div class="ach reveal"><span class="y">2026</span><span class="m">🏅</span><div><b><span lang="sk">SOČ — 4. miesto v celoštátnom kole</span><span lang="en">SOČ — 4th place, national finals</span></b><small><span lang="sk">Piešťany · 2. miesto v krajskom kole · elektrotechnika a mechatronika</span><span lang="en">Piešťany · 2nd place regional round · electrical engineering &amp; mechatronics</span></small></div></div>
-      <div class="ach reveal"><span class="y">2026</span><span class="m">🥈</span><div><b><span lang="sk">Strojár Inovátor — 2. miesto</span><span lang="en">Strojár Inovátor — 2nd place</span></b><small><span lang="sk">celoslovenská súťaž</span><span lang="en">national competition, Slovakia</span></small></div></div>
-      <div class="ach reveal"><span class="y">2025</span><span class="m">🤖</span><div><b>ROBO 2025</b><small><span lang="sk">robot sledujúci čiaru</span><span lang="en">line-following robot</span></small></div></div>
+    <div class="head reveal">
+      <div class="label"><span lang="sk">Každý Silvester</span><span lang="en">Every New Year's Eve</span></div>
+      <h2><span lang="sk">Pyromuzikály</span><span lang="en">Pyromusicals</span></h2>
+      <p><span lang="sk">Ohňostroj zladený s hudbou vo Veľkom Slavkove. Navrhujem vo Finale3D, odpaľujem systémom Cobra.</span>
+         <span lang="en">Fireworks synced to music in Veľký Slavkov. Designed in Finale3D, fired with a Cobra system.</span></p>
+    </div>
+    <figure class="cmp reveal">
+      <video data-auto muted loop playsinline preload="none" poster="media/pyro_cmp.jpg"><source src="media/pyro_cmp.mp4" type="video/mp4"></video>
+      <span class="tag l"><span lang="sk">Návrh · Finale3D</span><span lang="en">Design · Finale3D</span></span>
+      <span class="tag r"><span lang="sk">Realita</span><span lang="en">Reality</span></span>
+    </figure>
+    <div class="years reveal">
+      <span class="muted"><span lang="sk">Celé show na YouTube:</span><span lang="en">Full shows on YouTube:</span></span>
+      <a class="chip" href="https://www.youtube.com/watch?v=EICaFCHahYs" target="_blank" rel="noopener">▶ 2022/23</a>
+      <a class="chip" href="https://www.youtube.com/watch?v=2Vb1Re64DwY" target="_blank" rel="noopener">▶ 2023/24</a>
+      <a class="chip" href="https://www.youtube.com/watch?v=duKDjqMt2pE" target="_blank" rel="noopener">▶ 2024/25</a>
+      <a class="chip" href="https://www.youtube.com/watch?v=9e98DAGbOko" target="_blank" rel="noopener">▶ 2025/26</a>
     </div>
   </div>
 </section>
 
-<section id="stack">
+<section id="projekty">
   <div class="wrap">
-    <div class="head reveal"><span class="mono">04</span><h2>Stack</h2></div>
-    <div class="stack">
-      <div class="card reveal"><h3>Infra</h3><div class="chips">
-        <span class="chip">Linux</span><span class="chip">Proxmox</span><span class="chip">VMware ESXi</span><span class="chip">Docker</span><span class="chip">Fortinet</span><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Cloudflare</span></div></div>
-      <div class="card reveal"><h3>Code</h3><div class="chips">
-        <span class="chip">Python</span><span class="chip">C++</span><span class="chip">Node.js</span><span class="chip">React</span><span class="chip">Bash</span><span class="chip">Lua</span></div></div>
-      <div class="card reveal"><h3>Hardware</h3><div class="chips">
-        <span class="chip">ESP32-S3</span><span class="chip">ESPHome</span><span class="chip">Home Assistant</span><span class="chip">MQTT</span><span class="chip">EasyEDA</span><span class="chip">JLCPCB</span></div></div>
+    <div class="head reveal">
+      <div class="label"><span lang="sk">Čo staviam</span><span lang="en">What I build</span></div>
+      <h2><span lang="sk">Projekty</span><span lang="en">Projects</span></h2>
+    </div>
+    <div class="proj-grid">
+      <a class="card big reveal" href="https://flujd.tech" target="_blank" rel="noopener">
+        <div class="img"><img src="media/trophies.jpg" alt="Auto FLUJD" loading="lazy" style="object-position:40% 30%"></div>
+        <div class="body">
+          <span class="kind">FLUJD · Pneuracer 2.0</span>
+          <h3><span lang="sk">Auto na stlačený vzduch</span><span lang="en">Compressed-air car</span></h3>
+          <p><span lang="sk">Riadiaca doska s ESP, ELRS a solenoid drivermi v EasyEDA. Moja SOČ práca. Teraz AGV 2.0.</span>
+             <span lang="en">Control board with ESP, ELRS and solenoid drivers in EasyEDA. My SOČ thesis. Now AGV 2.0.</span></p>
+          <span class="chip" style="align-self:flex-start;margin-top:6px">flujd.tech ↗</span>
+        </div>
+      </a>
+      <a class="card reveal" href="https://github.com/PeterLinuxOSS/esphome-smart-sofa" target="_blank" rel="noopener">
+        <div class="img"><img src="media/pcb.jpg" alt="Spájkovanie PCB" loading="lazy" style="object-position:50% 40%"></div>
+        <div class="body">
+          <span class="kind">ESPHome · open hardware</span>
+          <h3>Smart sofa</h3>
+          <p><span lang="sk">Vlastná doska, sedačka vie, kde je — bez koncových spínačov.</span><span lang="en">Custom board; the sofa knows its position — no limit switches.</span></p>
+        </div>
+      </a>
+      <div class="card reveal">
+        <div class="body">
+          <span class="kind">Raspberry Pi 5</span>
+          <h3>PeterLinuxOS</h3>
+          <p><span lang="sk">Vlastný Linux pre Raspberry Pi 5 — odtiaľ tá prezývka.</span><span lang="en">My own Linux build for Raspberry Pi 5 — hence the handle.</span></p>
+        </div>
+      </div>
+      <a class="card reveal" href="https://github.com/PeterLinuxOSS/ha-cover-logic" target="_blank" rel="noopener">
+        <div class="body">
+          <span class="kind">Home Assistant</span>
+          <h3>Cover logic</h3>
+          <p><span lang="sk">Jeden engine rozhodne, kde má byť každá žalúzia.</span><span lang="en">One engine decides where every blind should be.</span></p>
+        </div>
+      </a>
+      <a class="card reveal" href="https://uzfuka.sk" target="_blank" rel="noopener">
+        <div class="body">
+          <span class="kind">Web app</span>
+          <h3>Už fúka</h3>
+          <p><span lang="sk">Vietor na spotoch pre wingfoil, windsurf a kite — a správa, keď začne fúkať.</span><span lang="en">Wind at your spots for wingfoil, windsurf and kite — and a ping when it picks up.</span></p>
+        </div>
+      </a>
+    </div>
+    <div class="stack reveal">
+      <span class="chip">Linux</span><span class="chip">Proxmox</span><span class="chip">VMware ESXi</span><span class="chip">Docker</span><span class="chip">UniFi</span><span class="chip">Fortinet</span>
+      <span class="chip">Python</span><span class="chip">C++</span><span class="chip">Node.js</span><span class="chip">React</span>
+      <span class="chip">ESP32-S3</span><span class="chip">ESPHome</span><span class="chip">Home Assistant</span><span class="chip">EasyEDA</span><span class="chip">JLCPCB</span><span class="chip">Finale3D</span>
     </div>
   </div>
 </section>
 
-<section id="contact" class="contact">
+<section id="zivot" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="label"><span lang="sk">Mimo práce</span><span lang="en">Off the clock</span></div>
+      <h2><span lang="sk">Čo ma ešte baví</span><span lang="en">What else I'm into</span></h2>
+    </div>
+    <div class="life">
+      <figure class="photo reveal">
+        <img src="media/mini.jpg" alt="MINI Cooper S pred Tatrami" loading="lazy">
+        <figcaption>MINI COOPER S · F56</figcaption>
+      </figure>
+      <div class="tiles">
+        <div class="tile reveal"><span class="e">🏎️</span><div><b>MINI &amp; BMW</b><br><small>BMW positive</small></div></div>
+        <div class="tile reveal"><span class="e">⛷️</span><div><b>Skialp</b><br><small lang="sk">v zime v Tatrách</small><small lang="en">winters in the Tatras</small></div></div>
+        <div class="tile reveal"><span class="e">🏠</span><div><b>Smart home</b><br><small lang="sk">všetko, čo má IP adresu</small><small lang="en">anything with an IP address</small></div></div>
+        <div class="tile reveal"><span class="e">💼</span><div><b>DATA SOFTWARE</b><br><small lang="sk">IT pre firmy popri škole</small><small lang="en">IT for companies alongside school</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="contact">
   <div class="wrap reveal">
-    <h2><span lang="sk">Poďme niečo postaviť.</span><span lang="en">Let's build something.</span></h2>
-    <p><span lang="sk">Infraštruktúra, automatizácia alebo vlastný hardvér — ozvi sa.</span><span lang="en">Infrastructure, automation or custom hardware — get in touch.</span></p>
+    <div class="label"><span lang="sk">Ozvi sa</span><span lang="en">Say hi</span></div>
+    <h2 style="margin-top:12px"><span lang="sk">Poďme niečo postaviť.</span><span lang="en">Let's build something.</span></h2>
+    <p><span lang="sk">SPŠ TaD Poprad (mechatronika) → Unicorn University, Praha.</span><span lang="en">SPŠ TaD Poprad (mechatronics) → Unicorn University, Prague.</span></p>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/PeterLinuxOSS" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="btn" href="https://www.instagram.com/peterlinuxos/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a class="btn primary" href="https://www.instagram.com/peterlinuxos/" target="_blank" rel="noopener">Instagram ↗</a>
       <a class="btn" href="https://www.youtube.com/@PeterLinuxOS" target="_blank" rel="noopener">YouTube ↗</a>
-      <a class="btn" href="https://datasoftware.sk" target="_blank" rel="noopener">datasoftware.sk ↗</a>
+      <a class="btn" href="https://github.com/PeterLinuxOSS" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://flujd.tech" target="_blank" rel="noopener">flujd.tech ↗</a>
     </div>
   </div>
 </section>
@@ -345,8 +397,8 @@ peter rigo · infra / embedded / homelab
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr">2026</span> Peter Rigo</span>
-    <span>"If it has an IP address, it can be automated."</span>
+    <span>© <span id="yr">2026</span> Peter Rigo · PeterLinuxOS</span>
+    <span><span lang="sk">Foto Poprad</span><span lang="en">Poprad photo</span>: Vojtasekd, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, Wikimedia Commons</span>
   </div>
 </footer>
 
@@ -359,10 +411,26 @@ peter rigo · infra / embedded / homelab
   document.getElementById("lang").onclick=function(){set(root.dataset.lang==="sk"?"en":"sk")};
   document.getElementById("yr").textContent=new Date().getFullYear();
 
+  var nav=document.getElementById("nav");
+  function onScroll(){nav.classList.toggle("solid",window.scrollY>40)}
+  onScroll();window.addEventListener("scroll",onScroll,{passive:true});
+
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var vids=document.querySelectorAll("video[data-auto]");
   var els=document.querySelectorAll(".reveal");
-  if(!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in")});return}
+  if(!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in")});vids.forEach(function(v){v.controls=true});return}
+
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
   els.forEach(function(e){io.observe(e)});
+
+  // videá hrajú len keď sú vidieť (šetrí dáta aj batériu); pri reduced-motion len ovládanie
+  if(reduce){vids.forEach(function(v){v.controls=true});return}
+  var vo=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){v.preload="auto";var p=v.play();if(p&&p.catch)p.catch(function(){v.controls=true})}
+    else v.pause();
+  })},{threshold:.35});
+  vids.forEach(function(v){vo.observe(v)});
 })();
 </script>
 </body>
