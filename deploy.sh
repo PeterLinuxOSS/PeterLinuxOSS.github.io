@@ -1,5 +1,5 @@
 #!/bin/sh
-# Zostaví stránky zo src/ a nasadí ich na lokálny nginx (127.0.0.1:8096 → tunel backup → peterlinuxos.me)
+# Zostaví stránky zo _src/ a nasadí ich na lokálny nginx (127.0.0.1:8096 → tunel backup → peterlinuxos.me)
 set -e
 cd "$(dirname "$0")"
 python3 build.py

@@ -4,10 +4,10 @@ Osobná stránka Petra Riga. Statický web v dvoch jazykoch: `/` (SK) a `/en/` (
 
 ## Úpravy
 
-Obsah sa upravuje **len v `src/index.html`**. `index.html` a `en/index.html` sú generované:
+Obsah sa upravuje **len v `_src/index.html`**. `index.html` a `en/index.html` sú generované:
 
 ```sh
-python3 build.py     # src/index.html → index.html + en/index.html
+python3 build.py     # _src/index.html → index.html + en/index.html
 ./deploy.sh          # build + nasadenie na lokálny nginx (peterlinuxos.me)
 ```
 

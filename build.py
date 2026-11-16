@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Zo šablóny src/index.html vyrobí index.html (SK) a en/index.html (EN).
+"""Zo šablóny _src/index.html vyrobí index.html (SK) a en/index.html (EN).
 
 V šablóne sú obe jazykové verzie:
   <span lang="sk">…</span><span lang="en">…</span>   prvky (span, b, small, figcaption)
@@ -26,7 +26,7 @@ def render(src, lang):
     # odkazy do novej karty to čítačke obrazovky povedia
     out = re.sub(r'(<a\b[^>]*target="_blank"[^>]*>.*?)</a>',
                  rf'\1<span class="sr"> ({NEWTAB[lang]})</span></a>', out, flags=re.S)
-    return out.replace('<!doctype html>\n', '<!doctype html>\n<!-- GENEROVANÉ z src/index.html cez build.py — neupravovať ručne -->\n', 1)
+    return out.replace('<!doctype html>\n', '<!doctype html>\n<!-- GENEROVANÉ z _src/index.html cez build.py — neupravovať ručne -->\n', 1)
 
 
 class Balance(HTMLParser):
@@ -50,7 +50,7 @@ def check(html, lang):
 
 
 def main():
-    src = (ROOT / 'src/index.html').read_text(encoding='utf-8')
+    src = (ROOT / '_src/index.html').read_text(encoding='utf-8')
     for lang, path in (('sk', 'index.html'), ('en', 'en/index.html')):
         html = render(src, lang); check(html, lang)
         (ROOT / path).parent.mkdir(exist_ok=True)
