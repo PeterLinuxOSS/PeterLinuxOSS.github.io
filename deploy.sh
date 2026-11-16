@@ -1,10 +1,14 @@
 #!/bin/sh
-# Nasadí stránku na lokálny nginx (127.0.0.1:8096 → tunel backup → peterlinuxos.me)
+# Zostaví stránky zo src/ a nasadí ich na lokálny nginx (127.0.0.1:8096 → tunel backup → peterlinuxos.me)
 set -e
 cd "$(dirname "$0")"
-install -d /var/www/peterlinuxos/media
-install -m 644 index.html robots.txt sitemap.xml /var/www/peterlinuxos/
+python3 build.py
+D=/var/www/peterlinuxos
+install -d $D/media $D/fonts $D/en
+install -m 644 index.html 404.html robots.txt sitemap.xml favicon.ico favicon.svg apple-touch-icon.png $D/
+install -m 644 en/index.html $D/en/
 # IndexNow kľúč (<32 hex>.txt v koreni)
-install -m 644 ????????????????????????????????.txt /var/www/peterlinuxos/
-install -m 644 media/* /var/www/peterlinuxos/media/
-echo "deployed to /var/www/peterlinuxos"
+install -m 644 ????????????????????????????????.txt $D/
+install -m 644 media/* $D/media/
+install -m 644 fonts/* $D/fonts/
+echo "deployed to $D"
